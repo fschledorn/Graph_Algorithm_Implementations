@@ -45,9 +45,7 @@ struct Edge {
   EdgeUID uid;
   std::shared_ptr<Node> from;
   std::shared_ptr<Node> to;
-  EdgeDirection direction;
   EdgeWeight weight;
-  Edge
 
   Edge()
       : from(nullptr),

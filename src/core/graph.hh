@@ -50,7 +50,7 @@ struct GraphTraits {
  * - The nodes vector must contain valid shared pointers to Node objects.
  * - The edges vector must contain valid shared pointers to Edge objects.
  */
-template <EdgeType T>
+
 struct Graph {
   GraphTraits traits;
   std::unordered_set<NodeUID, std::shared_ptr<Node>> node_list;
