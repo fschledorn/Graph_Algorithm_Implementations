@@ -1,0 +1,28 @@
+# Build artifacts
+*.o
+*.out
+graph_app # Or your specific executable name from the Makefile
+
+# Build directories (if you use them)
+build/
+bin/
+obj/
+
+# VS Code specific files
+.vscode/
+
+# macOS specific files
+.DS_Store
+
+# Other common temporary/backup files
+*~
+*.swp
+*.swo
+
+# External libraries managed by git submodule (like nlohmann_json)
+# Usually, you don't ignore the submodule folder itself,
+# but you might ignore build artifacts within it if they are generated.
+# Example: /external/nlohmann_json/build/
+
+# If you generate documentation
+docs/build/
