@@ -9,7 +9,7 @@ bin/
 obj/
 
 # VS Code specific files
-.vscode/
+.vscode/*
 
 # macOS specific files
 .DS_Store

@@ -54,12 +54,12 @@ struct GraphTraits {
 struct Graph {
   GraphTraits traits;
   std::unordered_set<NodeUID, std::shared_ptr<Node>> node_list;
-  std::unordered_set<EdgeUID, std::shared_ptr<Edge<T>>> edge_list;
+  std::unordered_set<EdgeUID, std::shared_ptr<Edge>> edge_list;
 
   /* [TODO: implement constructors and class methods]*/
   Graph();
   Graph(const std::vector<std::shared_ptr<Node>>&,
-        const std::vector<std::shared_ptr<Edge<T>>>&);
+        const std::vector<std::shared_ptr<Edge>>&);
 
   /* I would ideally like to read from a setup/config file. Maybe in JSON or
   yaml or some other well structured type of format. The parsing process should
@@ -71,11 +71,12 @@ struct Graph {
   Graph& operator=(const Graph&);
 
   void addNode(const std::shared_ptr<Node>&);
-  void addEdge(const std::shared_ptr<Edge<T>>&);
+  void addEdge(const std::shared_ptr<Edge>&);
   void removeNode(const NodeUID&);
   void removeEdge(const EdgeUID&);
   void removeNode(const std::shared_ptr<Node>&);
-  void removeEdge(const std::shared_ptr<Edge<T>>&);
+  void removeEdge(const std::shared_ptr<Edge>&);
+  bool hasTrait(const GraphTypes&) const;
 };
 
 

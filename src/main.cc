@@ -8,7 +8,7 @@ int main() {
     // Note: The Graph template requires an EdgeType, which is defined via a concept
     // expecting EdgeWeight. EdgeWeight itself is a std::variant.
     // We need to provide the specific variant type here.
-    Graph<EdgeWeight> myGraph;
+    Graph myGraph;
 
     std::cout << "Compilation test successful: Graph object created." << std::endl;
 

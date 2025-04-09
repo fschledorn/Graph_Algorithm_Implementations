@@ -16,6 +16,8 @@ using EdgeWeight =
 
 struct EdgeTraits {
   std::unordered_set<EdgeTypes> traits;
+  EdgeTraits() = delete;
+
   // Todo : Add a constructor to initialize the traits and perform checking logic
   // for the traits.
 };
@@ -46,18 +48,19 @@ struct Edge {
   std::shared_ptr<Node> from;
   std::shared_ptr<Node> to;
   EdgeWeight weight;
+  EdgeTraits traits;
 
-  Edge()
-      : from(nullptr),
-        to(nullptr),
-        direction(EdgeTraits::UNDIRECTED),
-        weight(std::monostate{}) {}
+  Edge() = delete;
 
   Edge(std::shared_ptr<Node> from, std::shared_ptr<Node> to,
-       const EdgeTraits& direction, const EdgeWeight& weight)
+       const EdgeTraits& traits, const EdgeWeight& weight)
       : from(from ? from : std::make_shared<Node>()),
         to(to ? to : std::make_shared<Node>()),
-        direction(direction),
+        traits(traits),
         weight(weight) {}
+
+  bool hasTrait(const EdgeTypes& trait) const {
+    return traits.traits.find(trait) != traits.traits.end();
+  }
 };
 #endif  // CORE_EDGE_H
