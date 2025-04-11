@@ -1,0 +1,22 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-std=c++23",
+      "-Wall",
+      "-Wextra",
+      "-g",
+      "-O3",
+      "-Isrc/core",
+      "-Iexternal/nlohmann_json/single_include",
+      "-Isrc",
+      "-c",
+      "-o",
+      "src/main.o",
+      "src/main.cc"
+    ],
+    "directory": "/home/schledorn/GitHub/Graph_Algorithm_Implementations",
+    "file": "/home/schledorn/GitHub/Graph_Algorithm_Implementations/src/main.cc",
+    "output": "/home/schledorn/GitHub/Graph_Algorithm_Implementations/src/main.o"
+  }
+]

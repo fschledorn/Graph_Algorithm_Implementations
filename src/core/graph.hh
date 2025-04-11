@@ -1,12 +1,11 @@
 #ifndef CORE_GRAPH_H
 #define CORE_GRAPH_H
-#include <memory>
-#include <unordered_map>
-#include <unordered_set>
-#include <vector>
-
 #include "edge.hh"
 #include "node.hh"
+#include "typenames.hh"
+#include <memory>
+#include <unordered_set>
+#include <vector>
 
 template <typename T>
 concept EdgeType = std::is_same_v<T, EdgeWeight>;
@@ -59,26 +58,25 @@ struct Graph {
 
   /* [TODO: implement constructors and class methods]*/
   Graph();
-  Graph(const std::vector<std::shared_ptr<Node>>&,
-        const std::vector<std::shared_ptr<Edge>>&);
+  Graph(const std::vector<std::shared_ptr<Node>> &,
+        const std::vector<std::shared_ptr<Edge>> &);
 
   /* I would ideally like to read from a setup/config file. Maybe in JSON or
   yaml or some other well structured type of format. The parsing process should
   be multithreaded to minimize I/O lag*/
-  Graph(const std::fstream&);
+  Graph(const std::fstream &);
 
-  Graph(const Graph&);
-  Graph(Graph&&) noexcept;
-  Graph& operator=(const Graph&);
+  Graph(const Graph &);
+  Graph(Graph &&) noexcept;
+  Graph &operator=(const Graph &);
 
-  void addNode(const std::shared_ptr<Node>&);
-  void addEdge(const std::shared_ptr<Edge>&);
-  void removeNode(const NodeUID&);
-  void removeEdge(const EdgeUID&);
-  void removeNode(const std::shared_ptr<Node>&);
-  void removeEdge(const std::shared_ptr<Edge>&);
-  bool hasTrait(const SingleGraphTrait&) const;
+  void addNode(const std::shared_ptr<Node> &);
+  void addEdge(const std::shared_ptr<Edge> &);
+  void removeNode(const NodeUID &);
+  void removeEdge(const EdgeUID &);
+  void removeNode(const std::shared_ptr<Node> &);
+  void removeEdge(const std::shared_ptr<Edge> &);
+  bool hasTrait(const SingleGraphTrait &) const;
 };
 
-
-#endif  // CORE_GRAPH_H
+#endif // CORE_GRAPH_H

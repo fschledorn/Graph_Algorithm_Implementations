@@ -26,3 +26,6 @@ obj/
 
 # If you generate documentation
 docs/build/
+
+# Caches
+.cache/*
