@@ -48,7 +48,7 @@ struct AbstractEdgeContainer {
   virtual void removeEdge(const EdgeUID&) = 0;
   virtual void removeEdge(const std::shared_ptr<Edge>&) = 0;
   virtual void findAllOutgoingEdges(
-      const std::shared_ptr<std::unordered_map<EdgeUID, Edge>>) = 0; //todo: arbitrary type
+      const std::shared_ptr<std::unordered_map<EdgeUID, Edge>>) = 0; 
 };
 
 struct Node {
@@ -69,6 +69,10 @@ struct Node {
 
   void findAllOutgoingEdges(
       const std::shared_ptr<std::unordered_map<EdgeUID, Edge>> edge_list);
+  void findAllIncomingEdges(
+      const std::shared_ptr<std::unordered_map<EdgeUID, Edge>> edge_list) {
+    incoming_edges->findAllOutgoingEdges(edge_list);
+  }
 };
 
 Node::Node() : uid(std::numeric_limits<NodeUID>::max()), data(std::nullopt) {}

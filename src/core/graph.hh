@@ -18,7 +18,7 @@ concept EdgeType = std::is_same_v<T, EdgeWeight>;
  * The goal is to create a flexible and extensible way to define and combine
  * different graph properties.
  */
-enum class GraphTypes {
+enum class SingleGraphTrait {
   UNDETERMINED,
   DIRECTED,
   UNDIRECTED,
@@ -28,10 +28,11 @@ enum class GraphTypes {
   ACYCLIC,
   CONNECTED,
   DISCONNECTED,
+  EMPTY
 };
 
 struct GraphTraits {
-  std::unordered_set<GraphTypes> data;
+  std::unordered_set<SingleGraphTrait> data;
   // TOdo : Add a constructor to initialize the traits and perform checking
   // logic for the traits.
 };
@@ -76,7 +77,7 @@ struct Graph {
   void removeEdge(const EdgeUID&);
   void removeNode(const std::shared_ptr<Node>&);
   void removeEdge(const std::shared_ptr<Edge>&);
-  bool hasTrait(const GraphTypes&) const;
+  bool hasTrait(const SingleGraphTrait&) const;
 };
 
 
