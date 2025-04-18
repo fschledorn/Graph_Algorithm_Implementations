@@ -6,6 +6,10 @@
 #include <memory>
 #include <unordered_map>
 
+template <typename T>
+concept NumericOrMonostate =
+    std::is_arithmetic_v<T> || std::is_same_v<T, std::monostate>;
+
 struct Edge;
 
 // Abstract class for edges container (type erasure)
