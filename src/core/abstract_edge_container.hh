@@ -5,6 +5,7 @@
 #include <cstddef>
 #include <memory>
 #include <unordered_map>
+#include <variant>
 
 template <typename T>
 concept NumericOrMonostate =

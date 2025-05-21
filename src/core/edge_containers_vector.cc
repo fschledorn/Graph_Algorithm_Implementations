@@ -2,6 +2,7 @@
 #include "abstract_edge_container.hh"
 #include "edge.hh"
 #include <cstddef>
+#include <execution>
 #include <memory>
 
 template <NumericOrMonostate T>
