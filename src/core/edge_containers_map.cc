@@ -77,8 +77,11 @@ void EdgeMapContainer<T>::findAllOutgoingEdges(
 
   // Of course Apple’s libc++ does not yet implement parallel algorithms or 
   // the std::execution policies ---- AHHHHHHHH
-  std::for_each(std::execution::par, edge_list->begin(), edge_list->end(),
-                add_edge_if_from_this);
+  #if defined(_LIBCPP_VERSION)
+    std::for_each(edge_list->begin(), edge_list->end(), add_edge_if_from_this);
+#else
+    std::for_each(std::execution::par, edge_list->begin(), edge_list->end(), add_edge_if_from_this);
+#endif
 
   std::lock_guard<std::mutex> lock(mtx);
   for (const auto &edge : local_edges) {
