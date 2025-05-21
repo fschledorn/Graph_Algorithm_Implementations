@@ -11,7 +11,7 @@ struct EdgeVectorContainer : AbstractEdgeContainer {
 
   EdgeVectorContainer(std::shared_ptr<std::vector<std::shared_ptr<Edge>>> e);
 
-  std::shared_ptr<Edge> getEdge(const int index) const override;
+  std::shared_ptr<Edge> getEdge(const EdgeUID edge) const override;
 
   std::size_t size() const override;
 

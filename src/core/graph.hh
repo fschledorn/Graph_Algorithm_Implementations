@@ -53,8 +53,8 @@ struct GraphTraits {
 
 struct Graph {
   GraphTraits traits;
-  std::unordered_set<NodeUID, std::shared_ptr<Node>> node_list;
-  std::unordered_set<EdgeUID, std::shared_ptr<Edge>> edge_list;
+  std::unordered_map<NodeUID, std::shared_ptr<Node>> node_list;
+  std::unordered_map<EdgeUID, std::shared_ptr<Edge>> edge_list;
 
   /* [TODO: implement constructors and class methods]*/
   Graph();

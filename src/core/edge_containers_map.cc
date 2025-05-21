@@ -1,9 +1,11 @@
 #include "edge_containers_map.hh"
-#include "abstract_edge_container.hh"
+
 #include <algorithm>
 #include <execution>
 #include <utility>
 #include <vector>
+#include <mutex>
+#include "abstract_edge_container.hh"
 
 template <NumericOrMonostate T>
 EdgeMapContainer<T>::EdgeMapContainer(
@@ -14,8 +16,8 @@ EdgeMapContainer<T>::EdgeMapContainer(
                   std::unordered_map<EdgeUID, std::shared_ptr<Edge>>>()) {}
 
 template <NumericOrMonostate T>
-std::shared_ptr<Edge>
-EdgeMapContainer<T>::getEdge(const EdgeUID &EdgeUid) const {
+std::shared_ptr<Edge> EdgeMapContainer<T>::getEdge(
+    const EdgeUID EdgeUid) const {
   auto it = outgoing_edges->find(EdgeUid);
   if (it != outgoing_edges->end()) {
     return it->second;
@@ -23,7 +25,8 @@ EdgeMapContainer<T>::getEdge(const EdgeUID &EdgeUid) const {
   throw std::out_of_range("Edge not found");
 }
 
-template <NumericOrMonostate T> std::size_t EdgeMapContainer<T>::size() const {
+template <NumericOrMonostate T>
+std::size_t EdgeMapContainer<T>::size() const {
   return outgoing_edges->size();
 }
 
@@ -52,7 +55,8 @@ void EdgeMapContainer<T>::removeEdge(const std::shared_ptr<Edge> &edge) {
   if (!outgoing_edges || !edge) {
     return;
   }
-  auto it = std::find(outgoing_edges->begin(), outgoing_edges->end(), edge);
+  auto it = std::find_if(outgoing_edges->begin(), outgoing_edges->end(),
+                         [&](const auto &pair) { return pair.second == edge; });
   if (it != outgoing_edges->end()) {
     outgoing_edges->erase(it);
   }
@@ -71,6 +75,8 @@ void EdgeMapContainer<T>::findAllOutgoingEdges(
     }
   };
 
+  // Of course Apple’s libc++ does not yet implement parallel algorithms or 
+  // the std::execution policies ---- AHHHHHHHH
   std::for_each(std::execution::par, edge_list->begin(), edge_list->end(),
                 add_edge_if_from_this);
 

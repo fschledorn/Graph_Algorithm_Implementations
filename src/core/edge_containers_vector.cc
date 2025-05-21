@@ -12,9 +12,9 @@ EdgeVectorContainer<T>::EdgeVectorContainer(
           e ? e : std::make_shared<std::vector<std::shared_ptr<Edge>>>()) {}
 
 template <NumericOrMonostate T>
-std::shared_ptr<Edge> EdgeVectorContainer<T>::getEdge(const int index) const {
-  if (index >= 0 && index < outgoing_edges->size()) {
-    return (*outgoing_edges)[index];
+std::shared_ptr<Edge> EdgeVectorContainer<T>::getEdge(const EdgeUID edge) const {
+  if (edge >= 0 && edge < outgoing_edges->size()) {
+    return (*outgoing_edges)[edge];
   }
   throw std::out_of_range("Index out of range");
 }

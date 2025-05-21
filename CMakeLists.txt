@@ -4,10 +4,17 @@ project(GraphAlgorithmImplementations LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Add core library (header-only, so this is INTERFACE)
-add_library(graph_core INTERFACE)
-target_include_directories(graph_core INTERFACE
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/core
+# Gather all core source files (excluding test files)
+file(GLOB CORE_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/core/*.cc
+)
+
+# Remove test files from the list if any accidentally match
+list(FILTER CORE_SOURCES EXCLUDE REGEX "tests/")
+
+add_library(graph_core STATIC ${CORE_SOURCES})
+target_include_directories(graph_core PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
     ${CMAKE_CURRENT_SOURCE_DIR}/external/nlohmann_json/single_include
 )
 

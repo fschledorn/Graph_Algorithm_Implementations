@@ -14,7 +14,7 @@ struct EdgeMapContainer : AbstractEdgeContainer {
   EdgeMapContainer(
       std::shared_ptr<std::unordered_map<EdgeUID, std::shared_ptr<Edge>>> e);
 
-  std::shared_ptr<Edge> getEdge(const EdgeUID &EdgeUid) const override;
+  std::shared_ptr<Edge> getEdge(const EdgeUID EdgeUid) const override;
 
   std::size_t size() const override;
 

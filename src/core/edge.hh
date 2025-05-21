@@ -10,13 +10,13 @@ enum class EdgeTypes { UNDIRECTED, DIRECTED, WEIGHTED, UNWEIGHTED };
 
 using EdgeWeight =
     std::variant<double, int, unsigned int,
-                 std::monostate>; // Does this work when the type is not known
-                                  // at compile time? Probably not?
+                 std::monostate>;  // Does this work when the type is not known
+                                   // at compile time? Probably not?
 
 struct EdgeTraits {
   std::unordered_set<EdgeTypes> traits;
   EdgeTraits() = delete;
-
+  explicit EdgeTraits(std::unordered_set<EdgeTypes> t) : traits(std::move(t)) {}
   // Todo : Add a constructor to initialize the traits and perform checking
   // logic for the traits.
 };
@@ -54,11 +54,12 @@ struct Edge {
   Edge(std::shared_ptr<Node> from, std::shared_ptr<Node> to,
        const EdgeTraits &traits, const EdgeWeight &weight)
       : from(from ? from : std::make_shared<Node>()),
-        to(to ? to : std::make_shared<Node>()), weight(weight), traits(traits) {
-  }
+        to(to ? to : std::make_shared<Node>()),
+        weight(weight),
+        traits(traits) {}
 
   bool hasTrait(const EdgeTypes &trait) const {
     return traits.traits.find(trait) != traits.traits.end();
   }
 };
-#endif // CORE_EDGE_H
+#endif  // CORE_EDGE_H
